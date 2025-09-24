@@ -5,6 +5,11 @@
         "calificaciones" => ["Programacion" => 8, "Bases de Datos" => 10]
     ];
 
+    echo "<pre>";
+    print_r($personas);
+    var_dump($personas);
+    echo "</pre>";
+    
     echo $personas["emails"][1] . "<br>";
 
     foreach ($personas["calificaciones"] as $asignatura => $nota) {
