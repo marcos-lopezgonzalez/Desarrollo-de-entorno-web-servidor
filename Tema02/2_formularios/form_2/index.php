@@ -16,6 +16,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $edadError = "Edad no válida";
     }
+
+    if (isset($_POST["sexo"]) && $_POST["sexo"] != "") {
+        $sexo = $_POST["sexo"];
+    } else {
+        $sexoError = "No has seleccionado sexo.";
+    }
+
+    if (isset($_POST["aficiones"])) {
+        $aficiones = $_POST["aficiones"];
+    } else {
+        $aficionesError = [];
+    }
 }
 ?>
 
@@ -58,9 +70,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </p>
 
                 <p>
-                    <input type="radio" id="sexo_masculino" name="sexo" value"M"></input>
+                    <input type="radio" id="sexo_masculino" name="sexo" value="M">
                     <label for="sexo_masculino">MASCULINO</label>
-                    <input type="radio" id="sexo_femenino" name="sexo" value"F"></input>
+                    <input type="radio" id="sexo_femenino" name="sexo" value="F">
                     <label for="sexo_femenino">FEMENINO</label>
                 </p>
 
@@ -90,12 +102,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<div class='error'>ERROR: $edadError</div>";
             }
 
+            if (isset($sexoError)) {
+                echo "<div class='error'>ERROR: $sexoError</div>";
+            }
+
+            if (isset($aficionesError)) {
+                echo "<div class='error'>ERROR: $aficionesError[0]</div>";
+            }
+
             if (isset($nombre)) {
                 echo "Nombre: " . $nombre . "<br>";
             }
 
             if (isset($edad)) {
                 echo "Edad: " . $edad . "<br>";
+            }
+
+            if (isset($sexo)) {
+                echo "Sexo: " . $sexo . "<br>";
+            }
+
+            if (isset($aficiones)) {
+                echo "Aficiones: ";
+                foreach ($aficiones as $aficion) {
+                    echo ($aficion . " ");
+                }
+                echo "<br>";
             }
             ?>
         </div>
