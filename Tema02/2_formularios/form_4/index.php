@@ -1,5 +1,9 @@
 <?php
 
+require_once("includes/funciones.php");
+
+$subidaOk = false;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     print "<pre>";
     print "Matriz \$_FILES" . "<br>";
@@ -16,10 +20,11 @@ if ($_FILES["fichero"]["size"] > 100000) {
         $ruta_subida . $_FILES["fichero"]["name"]
     );
 
-    if($res) {
+    if ($res) {
         $mensaje = "fichero guardado correctamente";
+        $subidaOk = true;
     } else {
-        $mensaje = "error al guardar el ficheor";
+        $mensaje = "error al guardar el fichero";
     }
 }
 ?>
@@ -55,7 +60,20 @@ if ($_FILES["fichero"]["size"] > 100000) {
 
         <?php
 
+        if (isset($mensaje)) {
+            echo ("<p>Mensaje: $mensaje</p><br>");
+            echo("Ficheros totales guardados: " . numero_ficheros_directorio("bbdd/"));
+        }
 
+        if ($subidaOk) {
+            echo ("<br>Datos del fichero<br>");
+            $nombreFichero = $_FILES['fichero']['name'];
+            $tamBytes = $_FILES['fichero']['size'];
+            $tamKB = round($tamBytes / 1024);
+            echo ("Nombre del archivo: $nombreFichero <br>");
+            echo ("Tamaño: $tamBytes bytes | $tamKB KB <br>");
+            echo ('<img src="bbdd/' . $_FILES["fichero"]["name"] . '">');
+        }
         ?>
 
 
