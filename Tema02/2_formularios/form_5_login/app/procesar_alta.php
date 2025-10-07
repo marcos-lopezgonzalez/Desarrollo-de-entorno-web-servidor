@@ -1,5 +1,6 @@
 <?php
 require_once("includes/funciones.php");
+require_once("modelo/usuario.php");
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     header("Location: index.php");
@@ -18,26 +19,22 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
         die;
     }
 
-    //Comprobar si un email existe en la bbdd
-    $listaUsuarios = [];
-    $file = "bbdd/data.json";
-    $jsonData = file_get_contents("$file", FILE_USE_INCLUDE_PATH);
-    $listaUsuarios = json_decode($jsonData);
-    foreach ($listaUsuarios as $usuario) {
-        if ($usuario->email === $email) {
-            $mensaje = "El email ya existe";
-            header("Location: alta.php?mensaje=$mensaje");
-        }
+    if (comprobarEmailExiste($email)) {
+        $mensaje = "El email ya existe";
+        header("Location: alta.php?mensaje=$mensaje");
+        die;
     }
 
     if ($password1 !== $password2) {
         $mensaje = "Las contraseñas no coinciden";
         header("Location: alta.php?mensaje=$mensaje");
+        die;
     }
 
-    $listaUsuarios = [];
     $usuario = new Usuario($nombre, $email, $password1);
-
+    $file =  "bbdd/data.json";
+    $jsonData = file_get_contents($file);
+    $listaUsuarios = json_decode($jsonData);
     array_push($listaUsuarios, $usuario);
     $jsonData = json_encode($listaUsuarios, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     file_put_contents($file, $jsonData);

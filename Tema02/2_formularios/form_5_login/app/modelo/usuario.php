@@ -14,9 +14,7 @@ class Usuario implements JsonSerializable
     {
         $this->nombre = $nombre;
         $this->email = $email;
-
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $this->$password = $passwordHash;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
     public function getNombre()
@@ -46,8 +44,7 @@ class Usuario implements JsonSerializable
 
     public function setPassword($password)
     {
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $this->$password = $passwordHash;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
     public function jsonSerialize(): mixed

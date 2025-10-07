@@ -1,7 +1,17 @@
 [
     {
-        "nombre": "PRUEBA",
-        "email": "PRUEBA",
-        "password": "PRUEBA"
+        "nombre": "moha",
+        "email": "moha@gmail.com",
+        "password": "$2y$10$cizHGNEZ8X\/jFjH6dxmlwu9jH\/sZxmpTL7M\/0u2elUuxFqOIUwQSK"
+    },
+    {
+        "nombre": "marcos",
+        "email": "marcos@gmail.com",
+        "password": "$2y$10$Ca0SxCgx\/JHfZMPfiHmiv.aNgVa3dtjoz.auA77FHQnajvoSgb89."
+    },
+    {
+        "nombre": "123",
+        "email": "123@gmail.com",
+        "password": "$2y$10$iMvPksI6Euo3uDddqhgSlOoB3t6IcHOeAG4ZNIYCn8CB4LZu7drl2"
     }
 ]

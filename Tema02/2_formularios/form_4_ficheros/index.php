@@ -11,22 +11,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     print "</pre>\n";
 }
 
-if ($_FILES["fichero"]["size"] > 100000) {
-    $mensaje = "Archivo demasiado grande";
-} else {
-    $ruta_subida = "bbdd/";
-    $res = move_uploaded_file(
-        $_FILES["fichero"]["tmp_name"],
-        $ruta_subida . $_FILES["fichero"]["name"]
-    );
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["fichero"])) {
 
-    if ($res) {
-        $mensaje = "fichero guardado correctamente";
-        $subidaOk = true;
+    if ($_FILES["fichero"]["size"] > 100000) {
+        $mensaje = "Archivo demasiado grande";
     } else {
-        $mensaje = "error al guardar el fichero";
+        $ruta_subida = "bbdd/";
+        $res = move_uploaded_file(
+            $_FILES["fichero"]["tmp_name"],
+            $ruta_subida . $_FILES["fichero"]["name"]
+        );
+
+        if ($res) {
+            $mensaje = "Fichero guardado correctamente";
+            $subidaOk = true;
+        } else {
+            $mensaje = "Error al guardar el fichero";
+        }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +66,7 @@ if ($_FILES["fichero"]["size"] > 100000) {
 
         if (isset($mensaje)) {
             echo ("<p>Mensaje: $mensaje</p><br>");
-            echo("Ficheros totales guardados: " . numero_ficheros_directorio("bbdd/"));
+            echo ("Ficheros totales guardados: " . numero_ficheros_directorio("bbdd/"));
         }
 
         if ($subidaOk) {

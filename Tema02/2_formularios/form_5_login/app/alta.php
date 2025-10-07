@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -14,7 +13,7 @@
     <?php include("menu.php") ?>
     <!-- END menu.php INCLUDE -->
     <main>
-       
+
         <form class="formulario" action="procesar_alta.php" method="post">
             <h2>Registro</h2>
 
@@ -26,23 +25,24 @@
 
             <label for="password1">Contraseña</label>
             <input type="password" id="password1" name="password1" required>
-            
+
             <label for="password2">Repite Contraseña</label>
             <input type="password" id="password2" name="password2" required>
 
-            
+
             <button type="submit">Registrar</button>
-            
+
         </form>
         <br>
 
-        <?php 
-            if(isset($_GET("mensaje"))) {
-                $mensaje = $_GET("mensaje");
-                echo($_GET("mensaje"));
-            }
+        <?php
+        if (isset($_GET["mensaje"])) {
+            $mensaje = $_GET["mensaje"];
+            echo "<p class='mensaje fade-in-out'>$mensaje</p>";
+        }
+
         ?>
-        
+
         <br><br><br><br><br>
 
     </main>

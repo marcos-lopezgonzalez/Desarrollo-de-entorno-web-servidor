@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -14,7 +13,7 @@
     <?php include "menu.php"; ?>
     <!-- END menu.php INCLUDE -->
     <main>
-         <form class="formulario" action="procesar_login.php" method="post">
+        <form class="formulario" action="procesar_login.php" method="post">
             <h2>Login</h2>
 
             <label for="email">Correo electrónico</label>
@@ -22,12 +21,20 @@
 
             <label for="password">Contraseña</label>
             <input type="password" id="password" name="password">
-            
+
             <button type="submit">Acceder</button>
-            
+
         </form>
+
+        <?php
+        if (isset($_GET["mensaje"])) {
+            $mensaje = $_GET["mensaje"];
+            echo "<p class='mensaje fade-in-out'>$mensaje</p>";
+        }
+
+        ?>
         <br><br><br><br>
-        
+
 
 
     </main>
@@ -38,4 +45,3 @@
 </body>
 
 </html>
-
