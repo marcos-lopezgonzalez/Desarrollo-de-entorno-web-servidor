@@ -31,8 +31,8 @@
             $mensaje = $_GET["mensaje"];
             echo "<p class='mensaje fade-in-out'>$mensaje</p>";
         }
-
         ?>
+
         <br><br><br><br>
 
 
