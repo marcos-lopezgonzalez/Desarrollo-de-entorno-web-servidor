@@ -1,0 +1,60 @@
+[
+    {
+        "titulo": "Pinocho2",
+        "autor": "Yo mismo2",
+        "genero": [
+            "romance"
+        ],
+        "ano": "2",
+        "portada": "bbdd\/portadas\/pinocho.jpg"
+    },
+    {
+        "titulo": "el olor",
+        "autor": "el olfato",
+        "genero": [
+            "policiaco",
+            "terror"
+        ],
+        "ano": "12341234",
+        "portada": "bbdd\/portadas\/el-olor-de-la-magia.jpg"
+    },
+    {
+        "titulo": "Uy uy que",
+        "autor": "123",
+        "genero": [
+            "policiaco",
+            "terror"
+        ],
+        "ano": "1234",
+        "portada": "bbdd\/portadas\/el-olor-de-la-magia.jpg"
+    },
+    {
+        "titulo": "Sin Portasda",
+        "autor": "Sin portada",
+        "genero": [
+            "historico"
+        ],
+        "ano": "123123",
+        "portada": "bbdd\/portadas\/portada_generica.png"
+    },
+    {
+        "titulo": "PruebaAltaNormal",
+        "autor": "PruebaAltaNormal",
+        "genero": [
+            "romance",
+            "ciencia-ficcion"
+        ],
+        "ano": "1999",
+        "portada": "bbdd\/portadas\/pinocho.jpg"
+    },
+    {
+        "titulo": "PruebaAltaSinPortada",
+        "autor": "PruebaAltaSinPortada",
+        "genero": [
+            "historico",
+            "fantasia"
+        ],
+        "ano": "1000",
+        "portada": "bbdd\/portadas\/portada_generica.png"
+    }
+]
