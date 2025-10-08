@@ -14,7 +14,7 @@
     <!-- END menu.php INCLUDE -->
     <main>
 
-        <form action="procesar_alta.php" method="post">
+        <form class="formulario" action="procesar_alta.php" method="post" enctype="multipart/form-data">
             <h2>Registro</h2>
 
             <label for="titulo">Título</label>
@@ -28,12 +28,17 @@
             <br><br>
 
             <label for="genero">Género</label>
-            <input type="checkbox" name="generos[]" value="romance">Romance</input>
-            <input type="checkbox" name="generos[]" value="ciencia-ficcion">Ciencia Ficcion</input>
-            <input type="checkbox" name="generos[]" value="policiaco">Policiaco</input>
-            <input type="checkbox" name="generos[]" value="terror">Terror</input>
-            <input type="checkbox" name="generos[]" value="historico">Historico</input>
-            <input type="checkbox" name="generos[]" value="fantasia">Fantasia</input>
+            <fieldset>
+                <legend>Selecciona uno o varios géneros:</legend>
+
+                <label><input type="checkbox" name="generos[]" value="romance"> Romance</label><br>
+                <label><input type="checkbox" name="generos[]" value="ciencia-ficcion"> Ciencia ficción</label><br>
+                <label><input type="checkbox" name="generos[]" value="policiaco"> Policiaco</label><br>
+                <label><input type="checkbox" name="generos[]" value="terror"> Terror</label><br>
+                <label><input type="checkbox" name="generos[]" value="historico"> Histórico</label><br>
+                <label><input type="checkbox" name="generos[]" value="fantasia"> Fantasía</label>
+            </fieldset>
+
 
             <br><br>
 
@@ -43,7 +48,7 @@
             <br><br>
 
             <label for="portada">Portada</label>
-            <input type="file" id="portada" name="portada" required>
+            <input type="file" id="portada" name="portada">
 
             <br><br>
 
