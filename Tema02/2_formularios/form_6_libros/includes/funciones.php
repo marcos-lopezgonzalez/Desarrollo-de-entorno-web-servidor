@@ -1,6 +1,4 @@
 <?php
-// includes/funciones.php
-
 function recoge($var)
 {
     if (!isset($_REQUEST[$var])) {
@@ -46,4 +44,16 @@ function guardarLibro($nuevoLibro)
     //Pasamos el array de libros a JSON y guardamos los cambios en el fichero
     $jsonData = json_encode($listaLibros, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     file_put_contents($file, $jsonData);
+}
+
+function obtenerLibros()
+{
+    //Obtenemos los libros del fichero de BBDD
+    $listaLibros = [];
+    $file = "bbdd/data.json";
+    $jsonData = file_get_contents("$file", FILE_USE_INCLUDE_PATH);
+
+    //Pasamos el formato JSON a un array
+    $listaLibros = json_decode($jsonData);
+    return $listaLibros;
 }
