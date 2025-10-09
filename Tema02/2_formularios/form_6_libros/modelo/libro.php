@@ -17,6 +17,7 @@ class Libro implements JsonSerializable
         $this->portada = $portada;
     }
 
+    //Getters y Setters
     public function getTitulo()
     {
         return $this->titulo;
@@ -67,6 +68,7 @@ class Libro implements JsonSerializable
         $this->portada = $portada;
     }
 
+    //Funcion jsonSerialize para implementación del formato JSON
     public function jsonSerialize(): mixed
     {
         return [
