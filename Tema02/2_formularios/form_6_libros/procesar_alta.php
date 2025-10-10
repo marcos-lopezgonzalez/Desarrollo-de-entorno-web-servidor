@@ -20,6 +20,20 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     $rutaSubida = "bbdd/portadas/"; // Carpeta para subir las portadas
     $portada = "";
 
+    // Comprobaciones 
+    if ($genero === null || count($genero) === 0) {
+        $mensaje = "Debes asignar al menos un género...";
+        header("Location: alta.php?mensaje=" . urlencode($mensaje));
+        exit;
+    }
+
+    if (existeLibro($titulo)) {
+        $mensaje = "Ese libro ya está registrado...";
+        header("Location: alta.php?mensaje=" . urlencode($mensaje));
+        exit;
+    }
+
+
     // Recogemos portada
     // Comprobar si se ha adjuntado una portada
     if (!isset($_FILES['portada']) || $_FILES['portada']['error'] === UPLOAD_ERR_NO_FILE) {
@@ -46,20 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
             header("Location: alta.php?mensaje=" . urlencode($mensaje));
             die;
         }
-    }
-
-
-    // Comprobaciones 
-    if ($genero === null || count($genero) === 0) {
-        $mensaje = "Debes asignar al menos un género...";
-        header("Location: alta.php?mensaje=" . urlencode($mensaje));
-        exit;
-    }
-
-    if ($_FILES["portada"]["size"] > 100000) {
-        $mensaje = "Archivo demasiado grande";
-        header("Location: alta.php?mensaje=$mensaje");
-        die;
     }
 
     //Creamos el objeto para el nuevo libro

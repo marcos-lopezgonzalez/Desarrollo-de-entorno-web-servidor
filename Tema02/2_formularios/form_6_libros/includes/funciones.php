@@ -57,3 +57,22 @@ function obtenerLibros()
     $listaLibros = json_decode($jsonData);
     return $listaLibros;
 }
+
+function existeLibro($titulo)
+{
+    //Obtenemos los libros del fichero de BBDD
+    $listaLibros = [];
+    $file = "bbdd/data.json";
+    $jsonData = file_get_contents("$file", FILE_USE_INCLUDE_PATH);
+
+    //Pasamos el formato JSON a un array
+    $listaLibros = json_decode($jsonData);
+
+    //Si ya existe ese libro
+    foreach ($listaLibros as $libro)
+        //Eliminamos espacios con str_replace y pasamos a minusculas los titulos para comprobar si son iguales
+        if (str_replace(' ', '', strtolower($libro->titulo)) === str_replace(' ', '', strtolower($titulo)))
+            return true;
+    //Si no existe
+    return false;
+}
