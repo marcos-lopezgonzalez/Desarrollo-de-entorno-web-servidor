@@ -44,10 +44,11 @@ include_once "modelo/libro.php";
                 echo "<td>$libro->ano</td>";
                 //Genero/s
                 echo "<td>";
+                echo "<select>";
                 for ($i = 0; $i < count($libro->genero); $i++) {
-                    echo "{$libro->genero[$i]}";
-                    echo "<br>";
+                    echo "<option value=\"$genero\">{$libro->genero[$i]}</option>";
                 }
+                echo "</select>";
                 echo "</td>";
                 echo "</tr>";
             }
