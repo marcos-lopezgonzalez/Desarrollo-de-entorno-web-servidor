@@ -1,4 +1,7 @@
 <?php
+
+const file = "bbdd/data.json";
+
 function recoge($var)
 {
     if (!isset($_REQUEST[$var])) {
@@ -29,10 +32,7 @@ function recoge($var)
 
 function guardarLibro($nuevoLibro)
 {
-    //Fichero donde se guardan los libros. Obtenemos los libros guardados
-    $file =  "bbdd/data.json";
-    $jsonData = file_get_contents($file);
-    $listaLibros = json_decode($jsonData);
+    $listaLibros = obtenerLibros();
 
     // Ver si la lista de libros está vacía (no existe ningún libro en BBDD)
     if ($listaLibros === null) {
@@ -43,15 +43,14 @@ function guardarLibro($nuevoLibro)
     array_push($listaLibros, $nuevoLibro);
     //Pasamos el array de libros a JSON y guardamos los cambios en el fichero
     $jsonData = json_encode($listaLibros, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    file_put_contents($file, $jsonData);
+    file_put_contents(file, $jsonData);
 }
 
 function obtenerLibros()
 {
     //Obtenemos los libros del fichero de BBDD
     $listaLibros = [];
-    $file = "bbdd/data.json";
-    $jsonData = file_get_contents("$file", FILE_USE_INCLUDE_PATH);
+    $jsonData = file_get_contents(file, FILE_USE_INCLUDE_PATH);
 
     //Pasamos el formato JSON a un array
     $listaLibros = json_decode($jsonData);
@@ -60,13 +59,7 @@ function obtenerLibros()
 
 function existeLibro($titulo)
 {
-    //Obtenemos los libros del fichero de BBDD
-    $listaLibros = [];
-    $file = "bbdd/data.json";
-    $jsonData = file_get_contents("$file", FILE_USE_INCLUDE_PATH);
-
-    //Pasamos el formato JSON a un array
-    $listaLibros = json_decode($jsonData);
+    $listaLibros = obtenerLibros();
 
     //Si ya existe ese libro
     foreach ($listaLibros as $libro)
