@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $usuario_valido = "admin";
 $clave_valida = "1234";
 
@@ -15,6 +17,9 @@ $clave = $_POST["clave"] ?? "";
 $recordar = isset($_POST["recordar"]);
 
 if ($usuario === $usuario_valido && $clave === $clave_valida) {
+
+    $_SESSION["usuario"] = $usuario;
+
     if ($recordar) {
         //Le ponemos un tiempo de expiración a la cookie
         setcookie("usuario", $usuario, time() + (7 * 24 * 60 * 60), "/");

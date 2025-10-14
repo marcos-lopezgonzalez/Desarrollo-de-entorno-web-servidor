@@ -1,9 +1,19 @@
 <?php
-if(isset($_COOKIE["usuario"])) {
+
+session_start();
+
+if (isset($_SESSION["usuario"])) {
+    //Si existe es porque ya se había iniciado sesion
+    header("Location: bienvenida.php");
+    die;
+}
+
+if (isset($_COOKIE["usuario"])) {
     $nombreGuardado = $_COOKIE["usuario"];
 } else {
     $nombreGuardado = "";
 }
+
 ?>
 
 <!DOCTYPE html>
