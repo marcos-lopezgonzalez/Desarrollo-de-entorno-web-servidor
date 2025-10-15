@@ -13,6 +13,9 @@ if (!empty($_SESSION["nombre"])) {
 } else {
   $nombre = "";
 }
+
+$aficiones = $_SESSION["aficiones"] ?? [];
+
 ?>
 
 
@@ -38,6 +41,19 @@ if (!empty($_SESSION["nombre"])) {
     <form action="procesar.php" method="post">
       <p>Nombre: <input type="text" name="nombre" value="<?= $nombre ?>"></p>
       <p>Edad: <input type="text" name="edad" value="<?= $edad ?>"></p>
+
+      <input type="radio" id="sexo_masculino" name="sexo" value="M" <?php echo isset($_SESSION['sexo']) && $_SESSION['sexo'] == "M" ? "checked" : ""; ?>>
+      <label for="sexo_masculino">MASCULINO</label>
+
+      <input type="radio" id="sexo_femenino" name="sexo" value="F" <?php echo isset($_SESSION['sexo']) && $_SESSION['sexo'] == "F" ? "checked" : ""; ?>>
+      <label for="sexo_femenino">FEMENINO</label>
+
+      <p>
+        <input type="checkbox" name="aficiones[]" value="musica" <?php if (in_array("musica", $aficiones)) echo "checked"; ?>> Musica<br />
+        <input type="checkbox" name="aficiones[]" value="cine" <?php if (in_array("cine", $aficiones)) echo "checked"; ?>> Cine<br />
+        <input type="checkbox" name="aficiones[]" value="lectura" <?php if (in_array("lectura", $aficiones)) echo "checked"; ?>> Lectura<br />
+      </p>
+
       </p>
       <p><input type="submit" name="submit" value="Enviar"></p>
     </form>
@@ -50,11 +66,21 @@ if (!empty($_SESSION["nombre"])) {
     if (isset($_SESSION["error"]["edad"]))
       echo ("<p class=\"error\">" . $_SESSION["error"]["edad"] . "</p>");
 
+    if (isset($_SESSION["error"]["sexo"]))
+      echo ("<p class=\"error\">" . $_SESSION["error"]["sexo"] . "</p>");
+
+    if (isset($_SESSION["error"]["aficiones"]))
+      echo ("<p class=\"error\">" . $_SESSION["error"]["aficiones"] . "</p>");
+
     unset($_SESSION["error"]["nombre"]);
     unset($_SESSION["error"]["edad"]);
+    unset($_SESSION["error"]["sexo"]);
+    unset($_SESSION["error"]["aficiones"]);
 
     unset($_SESSION["nombre"]);
     unset($_SESSION["edad"]);
+    unset($_SESSION["sexo"]);
+    unset($_SESSION["aficione"]);
     ?>
 
   </main>

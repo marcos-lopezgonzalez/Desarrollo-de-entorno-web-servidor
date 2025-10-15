@@ -6,11 +6,28 @@
 //SALIDA: el valor del campo o null si está vacio
 function recoge($var)
 {
-    if (isset($_REQUEST[$var])) {
-        if ($_REQUEST[$var] != "") {
-            $tmp = trim(htmlspecialchars(strip_tags($_REQUEST[$var])));
-            return $tmp;
-        }
+    if (!isset($_REQUEST[$var])) {
+        return null;
     }
+
+    $valor = $_REQUEST[$var];
+
+    // Si es un array
+    if (is_array($valor)) {
+        $result = [];
+        foreach ($valor as $v) {
+            if ($v !== "") {
+                $tmp = trim(htmlspecialchars(strip_tags($v)));
+                $result[] = $tmp;
+            }
+        }
+        return count($result) ? $result : null;
+    }
+
+    // Si es una cadena
+    if ($valor != "") {
+        return trim(htmlspecialchars(strip_tags($valor)));
+    }
+
     return null;
 }
