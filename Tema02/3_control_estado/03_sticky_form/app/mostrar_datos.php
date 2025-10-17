@@ -4,9 +4,13 @@ session_start();
 
 $nombre = $_SESSION["nombre"];
 $edad = $_SESSION["edad"];
+$sexo = $_SESSION["sexo"];
+$aficiones = $_SESSION["aficiones"];
 
 unset($_SESSION["nombre"]);
 unset($_SESSION["edad"]);
+unset($_SESSION["sexo"]);
+unset($_SESSION["aficiones"]);
 
 ?>
 
@@ -23,6 +27,16 @@ unset($_SESSION["edad"]);
     <h2>Datos recibidos</h2>
     <p>Nombre: <?= $nombre ?></p>
     <p>Edad: <?= $edad ?></p>
+    <p>Sexo: <?= $sexo ?></p>
+    <p>Aficiones:
+    <ul>
+        <?php
+        foreach ($aficiones as $aficion) {
+            echo ("<li>$aficion</li>");
+        }
+        ?>
+    </ul>
+    </p>
     <a href="index.php"></a>
     <footer>
         <hr>

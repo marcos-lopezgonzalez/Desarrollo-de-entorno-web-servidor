@@ -80,7 +80,7 @@ $aficiones = $_SESSION["aficiones"] ?? [];
     unset($_SESSION["nombre"]);
     unset($_SESSION["edad"]);
     unset($_SESSION["sexo"]);
-    unset($_SESSION["aficione"]);
+    unset($_SESSION["aficiones"]);
     ?>
 
   </main>
