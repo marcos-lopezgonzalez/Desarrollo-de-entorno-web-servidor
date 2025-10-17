@@ -13,7 +13,7 @@ if (!isset($_SESSION["butacas"])) {
     [0, 0, 0, 0]
   ];
 
-  $precio = 0;
+  $precio = 0;  
 }
 
 // Cuando hacemos click en una butaca, es decir, se manda el input con la fila y columna de cada butaca
