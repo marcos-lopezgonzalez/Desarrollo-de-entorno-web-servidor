@@ -1,5 +1,9 @@
 <?php
 
+// Duración en segundos (24 horas = 86400 segundos)
+$duracion = 86400;
+// Ajustar el tiempo de vida de la cookie de sesión
+session_set_cookie_params($duracion);
 // Incializamos sesion para poder usar $_SESSION
 session_start();
 require_once("includes/funciones.php");
