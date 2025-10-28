@@ -1,7 +1,9 @@
 <?php
 
-// $mysqlHost = "127.0.0.1";
+$dbMotor = "mysql";
 $mysqlHost = "localhost";
 $mysqlUser = "root";
 $mysqlPassword = "";
 $mysqlDatabase = "personas";
+
+?>
