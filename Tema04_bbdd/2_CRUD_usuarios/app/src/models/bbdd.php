@@ -15,8 +15,6 @@ class BBDD
 
     private function __construct()
     {
-        global $conexionPDO;
-        global $instancia;
         global $dbMotor;
         global $mysqlHost;
         global $mysqlDatabase;
@@ -29,17 +27,16 @@ class BBDD
         $this->username = $mysqlUser;
         $this->password = $mysqlPassword;
 
-        $dsnConBBDD = "mysql:host=$mysqlHost;dbname=$mysqlDatabase;charset=utf8mb4";
-        $dsnSinBBDD = "msql:host=$mysqlHost;charset=utf8mb4";
+        $dsnConBBDD = "$this->dbMotor:host=$this->host;dbname=$this->database;charset=utf8mb4";
+        $dsnSinBBDD = "$this->dbMotor:host=$this->host;charset=utf8mb4";
 
         try {
             $this->conexionPDO = new PDO($dsnConBBDD, $this->username, $this->password);
-            echo ("<p>Exuti</p>");
+            // echo ("<p>Exito en la conexionPDO a la BBDD '$this->database' con PDO</p>");
+            $this->conexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo "<p>Error: No puede conectarse con la base de datos {$e->getMessage()}</p>";
+            // echo "<p>Error: No puede conectarse con la base de datos {$e->getMessage()}</p>";
         }
-
-        $this->conexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public static function getInstance()
@@ -49,4 +46,12 @@ class BBDD
         }
         return self::$instancia;
     }
+
+    public function getConection()
+    {
+        return $this->conexionPDO;
+    }
+
+    //Prohibe la duplicación de la conexión
+    private function __clone() {}
 }

@@ -4,6 +4,6 @@ $dbMotor = "mysql";
 $mysqlHost = "localhost";
 $mysqlUser = "root";
 $mysqlPassword = "";
-$mysqlDatabase = "personas";
+$mysqlDatabase = "usuariosdb";
 
 ?>
