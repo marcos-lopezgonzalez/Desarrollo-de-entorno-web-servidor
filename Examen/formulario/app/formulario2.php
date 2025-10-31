@@ -27,14 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" || isset($_SESSION["error"]["asignatur
   if (isset($_SESSION["error"]["asignaturas"])) {
     $mensajeError = $_SESSION["error"]["asignaturas"];
   } else if (isset($_SESSION["error"]["nombre"]) || isset($_SESSION["error"]["curso"])) {
-    //header("Location: formulario1.php");
-    echo ("<p>Hola1</p>");
-    // die;
+    header("Location: formulario1.php");
+    // echo ("<p>Hola1</p>");
+    die;
   }
 } else {
-  //header("Location: formulario1.php");
-  echo ("<p>Hola2</p>");
-  // die;
+  header("Location: formulario1.php");
+  // echo ("<p>Hola2</p>");
+  die;
 }
 
 
