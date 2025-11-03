@@ -7,11 +7,11 @@ class BBDD
 
     private $conexionPDO;
     private static $instancia;
-    private $dbMotor;
-    private $host;
-    private $database;
-    private $username;
-    private $password;
+    private string $dbMotor;
+    private string $host;
+    private string $database;
+    private string $username;
+    private string $password;
 
     private function __construct()
     {
@@ -50,6 +50,18 @@ class BBDD
     public function getConection()
     {
         return $this->conexionPDO;
+    }
+
+    public function getData($sql, array $parametros = [])
+    {
+        try {
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia->execute($parametros);
+            return $sentencia;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die;
+        }
     }
 
     //Prohibe la duplicación de la conexión
