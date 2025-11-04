@@ -2,6 +2,7 @@
 session_start();
 
 require_once "../models/bbdd.php";
+require_once "../models/usuario.php";
 
 if (!$_SESSION["conectado"] || !isset($_SESSION["conectado"])) {
     //Lo mandamos a index para que inicie la conexion
@@ -33,39 +34,40 @@ $sentencia = $dbInstancia->getData($sql);
     <table class="tabla" border="1">
         <thead>
             <tr>
-                <th>
-                    NOMBRE
-                </th>
-                <th>
-                    APELLIDOS
-                </th>
-                <th>
-                    USUARIO
-                </th>
-                <th>
-                    FECHA_NAC
-                </th>
-                <th>
-                    ACCION
-                </th>
+                <th>NOMBRE</th>
+                <th>APELLIDOS</th>
+                <th>USUARIO</th>
+                <th>FECHA_NAC</th>
+                <th>EDAD</th>
+                <th>ACCION</th>
             </tr>
         </thead>
         <tbody>
-            <?php while ($registroPDO = $sentencia->fetch(PDO::FETCH_OBJ)): ?>
+            <?php while ($registroPDO = $sentencia->fetch(PDO::FETCH_OBJ)):
+                $usuario = new Usuario(
+                    $registroPDO->id,
+                    $registroPDO->nombre,
+                    $registroPDO->apellidos,
+                    $registroPDO->usuario,
+                    $registroPDO->password,
+                    new DateTime($registroPDO->fecha_nac)
+                )
+            ?>
                 <tr>
-                    <td><?= $registroPDO->nombre ?></td>
-                    <td><?= $registroPDO->apellidos ?></td>
-                    <td><?= $registroPDO->usuario ?></td>
-                    <td><?= $registroPDO->fecha_nac ?></td>
+                    <td><?= $usuario->nombre ?></td>
+                    <td><?= $usuario->apellidos ?></td>
+                    <td><?= $usuario->usuario ?></td>
+                    <td><?= $usuario->fecha_nac->format("d/m/Y") ?></td>
+                    <td><?= $usuario->getEdad() ?></td>
 
                     <td>
-                        <a href="ver.php?id=<?= $registroPDO->id ?>"><button>VER</button></a>
+                        <a href="ver.php?id=<?= $usuario->id ?>"><button>VER</button></a>
                         <form action="../controllers/borrar-usuario.php" method="post">
-                            <input type="hidden" name="id" value="<?= $registroPDO->id ?>">
+                            <input type="hidden" name="id" value="<?= $usuario->id ?>">
                             <button type="submit">BORRAR</button>
                         </form>
                         <form action="../controllers/actualizar-usuario.php" method="post">
-                            <input type="hidden" name="id" value="<?= $registroPDO->id ?>">
+                            <input type="hidden" name="id" value="<?= $usuario->id ?>">
                             <button type="submit">ACTUALIZAR</button>
                         </form>
                     </td>
