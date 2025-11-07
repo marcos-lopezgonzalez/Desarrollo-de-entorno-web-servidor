@@ -62,11 +62,11 @@ $sentencia = $dbInstancia->getData($sql);
 
                     <td>
                         <a href="ver.php?id=<?= $usuario->id ?>"><button>VER</button></a>
-                        <form action="../controllers/borrar-usuario.php" method="post">
+                        <form action="../controllers/procesar-baja.php" method="post">
                             <input type="hidden" name="id" value="<?= $usuario->id ?>">
                             <button type="submit">BORRAR</button>
                         </form>
-                        <form action="../controllers/actualizar-usuario.php" method="post">
+                        <form action="actualizar-usuario.php" method="post">
                             <input type="hidden" name="id" value="<?= $usuario->id ?>">
                             <button type="submit">ACTUALIZAR</button>
                         </form>

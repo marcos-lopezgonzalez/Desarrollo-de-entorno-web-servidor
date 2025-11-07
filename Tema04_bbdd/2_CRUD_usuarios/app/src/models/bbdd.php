@@ -52,6 +52,9 @@ class BBDD
         return $this->conexionPDO;
     }
 
+    //Prohibe la duplicación de la conexión
+    private function __clone() {}
+
     public function getData($sql, array $parametros = [])
     {
         try {
@@ -64,6 +67,82 @@ class BBDD
         }
     }
 
-    //Prohibe la duplicación de la conexión
-    private function __clone() {}
+    //Método para insertar un usuario en la bbdd
+    public function insertarUsuario(Usuario $_usuario)
+    {
+        $sql = "INSERT INTO usuarios (nombre, apellidos, usuario, password, fecha_nac) 
+             VALUES (:nombre, :apellidos, :usuario, :password, :fecha_nac)";
+
+        try {
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia->bindParam(":nombre", $_usuario->nombre);
+            $sentencia->bindParam(":apellidos", $_usuario->apellidos);
+            $sentencia->bindParam(":usuario", $_usuario->usuario);
+            $sentencia->bindParam(":password", $_usuario->password);
+            $sentencia->bindParam(":fecha_nac", $_usuario->fecha_nac->format("Y-m-d"));
+            $sentencia->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    //Método para borrar usuario en la bbdd
+    public function borrarUsuario(int $_id)
+    {
+        $sql = "DELETE FROM usuarios WHERE id = :id";
+        try {
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia->bindParam(":id", $_id);
+            $sentencia->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function actualizarUsuario(Usuario $_usuario)
+    {
+        $id = $_usuario->id;
+        $nombre = $_usuario->nombre;
+        $apellidos = $_usuario->apellidos;
+        $usuario = $_usuario->usuario;
+        $password = $_usuario->password;
+        $fecha_nac = $_usuario->fecha_nac->format("Y-m-d");
+
+        if (is_null($password)) {
+            $sql = "UPDATE usuarios SET 
+                nombre = :nombre,
+                apellidos = :apellidos,
+                usuario = :usuario,
+                fecha_nac = :fecha_nac 
+                WHERE id = :id";
+        } else {
+            $sql = "UPDATE usuarios SET 
+                nombre = :nombre,
+                apellidos = :apellidos,
+                usuario = :usuario,
+                password = :password,
+                fecha_nac = :fecha_nac 
+                WHERE id = :id";
+        }
+
+        try {
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia->bindParam(":nombre", $nombre);
+            $sentencia->bindParam(":apellidos", $apellidos);
+            $sentencia->bindParam(":usuario", $usuario);
+            if (!is_null($password))
+                $sentencia->bindParam(":password", $password);
+            $sentencia->bindParam(":fecha_nac", $fecha_nac);
+            $sentencia->bindParam(":id", $id);
+            $sentencia->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
 }
