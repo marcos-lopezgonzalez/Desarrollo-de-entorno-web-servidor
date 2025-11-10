@@ -1,1 +1,8 @@
+#Ignorar todos los archivos .json
 *.json
+
+#No ignorar los composer.json
+!composer.json
+
+#Ignorar los directorios vendor
+vendor/
