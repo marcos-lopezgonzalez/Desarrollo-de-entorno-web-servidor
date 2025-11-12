@@ -20,6 +20,8 @@ $dbInstancia = BBDD::getInstance();
 $sql = "SELECT * FROM usuarios";
 $sentencia = $dbInstancia->getData($sql);
 
+saludar();
+
 ?>
 
 <!DOCTYPE html>
