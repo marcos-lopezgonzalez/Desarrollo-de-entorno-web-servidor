@@ -1,0 +1,4 @@
+[2025-11-13T16:44:45.476204+01:00] app.ERROR: Fallo en el CONSTRUCTOR creando el objeto PDO [] []
+[2025-11-13T16:44:45.481551+01:00] app.ERROR: SQLSTATE[HY000] [1049] Unknown database 'todo_123123db' {"archivo":"bbdd.php"} []
+[2025-11-14T17:19:21.677210+01:00] app.ERROR: ERROR en INSERTAR TAREA [] []
+[2025-11-14T17:19:21.684401+01:00] app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'todo_db.tarea' doesn't exist {"archivo":"bbdd.php"} []
