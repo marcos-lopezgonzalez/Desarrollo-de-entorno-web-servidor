@@ -17,6 +17,7 @@
     ],
     "require": {
         "monolog/monolog": "^3.9",
-        "mpdf/mpdf": "^8.2"
+        "mpdf/mpdf": "^8.2",
+        "mpdf/qrcode": "^1.2"
     }
 }

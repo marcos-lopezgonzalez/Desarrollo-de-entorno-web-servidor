@@ -41,7 +41,7 @@ class BBDD
         $config = json_decode(file_get_contents($configPath), true);
 
         $dbMotor = $config["dbMotor"];
-        $host = $config["myslqHost"];
+        $host = $config["mysqlHost"];
         $database = $config["mysqlDatabase"];
         $username = $config["mysqlUser"];
         $password = $config["mysqlPassword"];
@@ -106,7 +106,42 @@ class BBDD
 
             $this->conexionPDO->exec($sql);
         } catch (PDOException $e) {
-            echo($e->getMessage());
+            echo ($e->getMessage());
+        }
+    }
+
+    public function borrarUsuario($id)
+    {
+        try {
+            $sql = "DELETE FROM usuarios WHERE id = :id";
+            $sentecia = $this->conexionPDO->prepare($sql);
+            $sentecia->bindParam(":id", $id);
+            $sentecia->execute();
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
+
+    public function actualizarUsuario($id, $nombre, $apellidos, $usuario, $password)
+    {
+        try {
+            $sql = "UPDATE usuarios SET 
+                nombre = :nombre,
+                apellidos = :apellidos,
+                usuario = :usuario,
+                password = :password 
+                WHERE id = :id";
+
+            $sentecia = $this->conexionPDO->prepare($sql);
+            $sentecia->bindParam(":nombre", $nombre);
+            $sentecia->bindParam(":apellidos", $apellidos);
+            $sentecia->bindParam(":usuario", $usuario);
+            $sentecia->bindParam(":password", password_hash($password, PASSWORD_DEFAULT));
+            $sentecia->bindParam(":id", $id);
+            $sentecia->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die;
         }
     }
 } //fin clase
