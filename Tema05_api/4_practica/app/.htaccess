@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# RewriteBase: ruta local
+
+RewriteBase /dwes/Tema05_api/4_practica/app
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.+)$ index.php [QSA,L]
