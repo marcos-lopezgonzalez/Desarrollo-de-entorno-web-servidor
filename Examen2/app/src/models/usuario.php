@@ -1,0 +1,23 @@
+<?php
+
+namespace App\models;
+
+require __DIR__ . "/../../vendor/autoload.php";
+
+class Usuario
+{
+    public int $id;
+    public $nombre;
+    public $email;
+    public $password;
+    public $rol;
+
+    public function __construct(int $id, $nombre, $email, $password, $rol)
+    {
+        $this->id = $id;
+        $this->nombre = $nombre;
+        $this->email = $email;
+        $this->password = $password;
+        $this->rol = $rol;
+    }
+}
